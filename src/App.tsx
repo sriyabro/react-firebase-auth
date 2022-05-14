@@ -1,26 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Facebook, Google } from "@mui/icons-material";
+import Button from "@mui/material/Button";
+import React from "react";
+import "./App.css";
+import { signInWithProvider } from "./config/firebase.config";
+import { AuthProviders } from "./constants/providers.enum";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Button
+        variant="outlined"
+        startIcon={<Google />}
+        onClick={() => signInWithProvider(AuthProviders.Google)}
+      >
+        Sign in with Google
+      </Button>
+      <Button
+        variant="outlined"
+        startIcon={<Facebook />}
+        onClick={() => signInWithProvider(AuthProviders.Facebook)}
+      >
+        Sign in with Facebook
+      </Button>
+    </>
   );
-}
+};
 
 export default App;
