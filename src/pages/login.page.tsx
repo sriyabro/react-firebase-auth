@@ -52,7 +52,7 @@ const LoginPage: React.FC = () => {
         >
           <Facebook width={20} height={20} className="mx-2"/> Sign in with Facebook
         </button>
-        <small className="pt-2 text-danger">
+        <small className="pt-2 text-danger text-center">
           {authenticating ? "Authenticating..." : errorMsg}
         </small>
       </div>
