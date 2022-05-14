@@ -1,10 +1,10 @@
-import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
 import {
-  FacebookAuthProvider,
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
+    AuthErrorCodes,
+    FacebookAuthProvider,
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup
 } from "firebase/auth";
 import { AuthProviders } from "../constants/providers.enum";
 
@@ -33,17 +33,13 @@ export const signInWithProvider = (provider: AuthProviders) => {
       authProvider = new FacebookAuthProvider();
       break;
     default:
-      console.error("Invalid provider");
+      return new Promise(() => {
+        throw { code: AuthErrorCodes.INVALID_OAUTH_PROVIDER };
+      });
   }
   if (authProvider) {
-    signInWithPopup(auth, authProvider)
-      .then((result) => {
-        console.log(result);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    return signInWithPopup(auth, authProvider);
   }
 };
 
-const analytics = getAnalytics(app);
+// const analytics = getAnalytics(app);
