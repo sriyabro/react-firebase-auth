@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { AuthErrorCodes } from "firebase/auth";
+import { useState } from "react";
+import { Facebook, Google } from "../assets/svgs";
 import { signInWithProvider } from "../config/firebase.config";
 import { AuthProviders } from "../constants/providers.enum";
-import { AuthErrorCodes } from "firebase/auth";
-import { Google, Facebook } from "../assets/svgs";
 
-const LoginPage: React.FC = () => {
+const LoginPage = () => {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [authenticating, setAuthenticating] = useState(false);
 
@@ -40,17 +40,17 @@ const LoginPage: React.FC = () => {
           type="button"
           className="login-btn btn btn-outline-primary"
           onClick={() => onLoginWithProviderButtonClicked(AuthProviders.Google)}
+          disabled={authenticating}
         >
-          <Google width={20} height={20} className="mx-2"/> Sign in with Google
+          <Google width={20} height={20} className="mx-2" /> Sign in with Google
         </button>
         <button
           type="button"
           className="login-btn btn btn-outline-primary my-2"
-          onClick={() =>
-            onLoginWithProviderButtonClicked(AuthProviders.Facebook)
-          }
+          onClick={() => onLoginWithProviderButtonClicked(AuthProviders.Facebook)}
+          disabled={authenticating}
         >
-          <Facebook width={20} height={20} className="mx-2"/> Sign in with Facebook
+          <Facebook width={20} height={20} className="mx-2" /> Sign in with Facebook
         </button>
         <small className="pt-2 text-danger text-center">
           {authenticating ? "Authenticating..." : errorMsg}
